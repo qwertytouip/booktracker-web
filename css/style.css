@@ -13,24 +13,32 @@ header {
     background-color: #E3D5CA;
     padding: 25px 30px;
     border-bottom: 4px solid #D5BDAF;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 header h1 {
     color: #3B2A24;
     font-size: 2.2rem;
     margin: 0;
-    margin-bottom: 15px;
+}
+header nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 header nav a {
     color: #3B2A24;
     text-decoration: none;
     font-size: 1.1rem;
-    margin-right: 20px;
 }
 header nav a:hover {
     text-decoration: underline;
 }
 main {
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     padding: 50px 100px;
     
@@ -58,13 +66,74 @@ article {
     border: 1px solid #D5BDAF;
     border-radius: 8px;
     padding: 20px;
-    width: 240px;
+    width: 100%;
+    max-width: 400px;
+    min-width: 200px;
     text-align: center;
     align-items: center;
+    margin: 20px auto;
 }
 article img {
     width: 120px;
     height: 160px;
     border-radius: 6px;
     margin-bottom: 15px;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1rem;
+}
+.site-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+@media (max-width: 599px) {
+    main {
+        padding: 30px 20px;
+    }
+    header {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    header nav {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    article {
+        border-radius: 4px;
+        padding: 20px;
+        max-width: 400px;
+        min-width: 200px;
+        margin: 20px auto; 
+    }
+    .cards {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+@media (min-width: 600px) {
+    main {
+        padding: 40px 80px;
+    }
+    header {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    .cards {
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+}
+@media (min-width: 1024px) {
+    .cards {
+        grid-template-columns: repeat(5, 1fr);
+    }
 }
