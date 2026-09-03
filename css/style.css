@@ -14,10 +14,10 @@ header {
     padding: 25px 30px;
     border-bottom: 4px solid #D5BDAF;
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    gap: 1rem;
+    gap: 15px;
 }
 header h1 {
     color: #3B2A24;
@@ -26,8 +26,9 @@ header h1 {
 }
 header nav {
     display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
 }
 header nav a {
     color: #3B2A24;
@@ -40,7 +41,7 @@ header nav a:hover {
 main {
     max-width: 1000px;
     margin: 0 auto;
-    padding: 50px 100px;
+    padding: 30px 20px;
     
 }
 section {
@@ -64,11 +65,11 @@ footer {
 article {
     background-color: #fffaf5;
     border: 1px solid #D5BDAF;
-    border-radius: 8px;
+    border-radius: 4px;
     padding: 20px;
     width: 100%;
     max-width: 400px;
-    min-width: 200px;
+    min-width: 160px;
     text-align: center;
     align-items: center;
     margin: 20px auto;
@@ -81,8 +82,8 @@ article img {
 }
 .cards {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 1rem;
+    grid-template-columns: 1fr;
+    gap: 20px;
 }
 .site-header {
     display: flex;
@@ -90,34 +91,6 @@ article img {
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-}
-@media (max-width: 599px) {
-    main {
-        padding: 30px 20px;
-    }
-    header {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-    }
-    header nav {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-    article {
-        border-radius: 4px;
-        padding: 20px;
-        max-width: 400px;
-        min-width: 200px;
-        margin: 20px auto; 
-    }
-    .cards {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
 }
 @media (min-width: 600px) {
     main {
