@@ -6,42 +6,33 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1rem;
     line-height: 1.5;
-    background-color: #F5EBE0;
+    background-color: #ead6c3;
     color: #3e2723;
 }
 header {
-    background-color: #E3D5CA;
+    background-color: #e2c2a2;
     padding: 25px 30px;
-    border-bottom: 4px solid #D5BDAF;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+    border-bottom: 4px solid #b08968;
 }
 header h1 {
     color: #3B2A24;
     font-size: 2.2rem;
     margin: 0;
-}
-header nav {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    text-align: center;
+    margin-bottom: 15px;
 }
 header nav a {
     color: #3B2A24;
     text-decoration: none;
     font-size: 1.1rem;
+    margin-right: 20px;
 }
 header nav a:hover {
     text-decoration: underline;
 }
 main {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 30px 20px;
+    padding: 50px 100px;
     
 }
 section {
@@ -49,8 +40,8 @@ section {
 }
 
 aside  {
-    background-color: #E3D5CA;
-    border: 2px solid #D5BDAF;
+    background-color: #e2c2a2;
+    border: 2px solid #c7a17d;
     padding: 25px 30px;
 }
 footer {
@@ -58,53 +49,20 @@ footer {
     padding: 25px 30px;
     text-align: center;
     color: #1e1413;
-    background-color: #cac0b8;
+    background-color: #ddb892;
 }
 article {
-    background-color: #fffaf5;
+    background-color: #ede0d4;
     border: 1px solid #D5BDAF;
-    border-radius: 4px;
+    border-radius: 8px;
     padding: 20px;
-    width: 100%;
-    max-width: 400px;
-    min-width: 160px;
+    width: 240px;
     text-align: center;
     align-items: center;
-    margin: 20px auto;
 }
 article img {
     width: 120px;
     height: 160px;
     border-radius: 6px;
     margin-bottom: 15px;
-}
-.cards {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-.site-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 12px;
-}
-@media (min-width: 600px) {
-    main {
-        padding: 40px 80px;
-    }
-    header {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: space-between;
-    }
-    .cards {
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    }
-}
-@media (min-width: 1024px) {
-    .cards {
-        grid-template-columns: repeat(5, 1fr);
-    }
 }
