@@ -14,50 +14,100 @@
           <a href="#myBooks">Мої книги</a>
       </nav>
     </header>
-    <main>
-      <section id="add">
-        <h2>Додати книгу</h2>
-        
-        <label for="book-title">Додати книгу</label>
-        <input type="text" id="book-title" name="title">
-        
-        <label for="book-author">Автор</label>
-        <input type="text" id="book-author" name="author">
+    <div class="layout">
+      <main>
+        <section id="add">
+          <h2>Додати книгу</h2>
+          
+          <label for="book-title">Додати книгу</label>
+          <input type="text" id="book-title" name="title">
+          
+          <label for="book-author">Автор</label>
+          <input type="text" id="book-author" name="author">
+  
+        </section>
+        <section id="myBooks">
+          <h2>Мої книги</h2>
+          <div class="cards">
+            <article>
+              <h3>C# in Depth</h3>
+              <img src="assets/img/sharp in depth.jpg" alt="Обкладинка книги C# in Depth">
+              <p>автор: Джон Скіт</p>
+              <p>статус: Прочитано</p>
+            </article>
 
-      </section>
-      <section id="myBooks">
-        <h2>Мої книги</h2>
+            <article>
+              <h3>Python Crash Course</h3>
+              <img src="assets/img/python crash course.jpg" alt="Обкладинка книги Python Crash Course">
+              <p>автор: Ерік Матез</p>
+              <p>статус: Розпочато</p>
+            </article>
 
-        <article>
-          <h3>C# in Depth</h3>
-          <img src="assets/img/test.jpg" alt="Обкладинка книги C# in Depth">
-          <p>автор: Джон Скіт</p>
-          <p>статус: Прочитано</p>
-        </article>
+            <article>
+              <h3>Dune</h3>
+              <img src="assets/img/dune.jpg" alt="Обкладинка книги Dune">
+              <p>автор: Френк Герберт</p>
+              <p>статус: Розпочато</p>
+            </article>
+            
+            <article>
+              <h3>The Martian</h3>
+              <img src="assets/img/the martian.jpg" alt="Обкладинка книги The Martian">
+              <p>автор: Енді Вір</p>
+              <p>статус: Прочитано</p>
+            </article>
 
-        <article>
-          <h3>Python Crash Course</h3>
-          <img src="assets/img/test.jpg" alt="Обкладинка книги Python Crash Course">
-          <p>автор: Ерік Матез</p>
-          <p>статус: Розпочато</p>
-        </article>
-        
-        <article>
-          <h3>Чистий код: створення, аналіз та рефакторинг</h3>
-          <img src="assets/img/test.jpg" alt="Обкладинка книги Чистий код: створення, аналіз та рефакторинг">
-          <p>автор: Роберт Мартін</p>
-          <p>статус: Розпочато</p>
-        </article>
-        
-      </section>
-    </main>
-    
-    <aside>
-      <h2>Статистика читання</h2>
-      <p>Прочитано: 1</p>
-      <p>Розпочато: 2</p>
-    </aside>
-    <br>
+            <article>
+              <h3>1984</h3>
+              <img src="assets/img/1984.jpg" alt="Обкладинка книги 1984">
+              <p>автор: Джордж Орвелл </p> 
+              <p>статус: Не розпочато</p>
+            </article>
+
+            <article>
+              <h3>A Game of Thrones</h3>
+              <img src="assets/img/a game of thrones.jpg" alt="Обкладинка книги A Game of Thrones">
+              <p>автор: Джордж Р. Р. Мартін</p>
+              <p>статус: Прочитано</p>
+            </article>
+
+            <article>
+              <h3>American Gods</h3>
+              <img src="assets/img/american gods.jpg" alt="Обкладинка книги American Gods">
+              <p>автор: Ніл Ґейман</p>
+              <p>статус: Розпочато</p>
+            </article>
+
+            <article>
+              <h3>The Shining</h3>
+              <img src="assets/img/the shining.jpg" alt="Обкладинка книги A Brief History of Time">
+              <p>автор: Стівен Кінг</p>
+              <p>статус: Не розпочато</p>
+            </article>
+            <article>
+              <h3>Atomic Habits</h3>
+              <img src="assets/img/atomic habits.jpg" alt="Обкладинка книги Atomic Habits">
+              <p>автор: Джеймс Клір</p>
+              <p>статус: Прочитано</p>
+            </article>
+
+            <article>
+              <h3>Educated</h3>
+              <img src="assets/img/educated.jpg" alt="Обкладинка книги Educated">
+              <p>автор: Тара Вестовер</p>
+              <p>статус: Прочитано</p>
+            </article>
+          </div>
+        </section>
+      </main>
+
+      <aside>
+        <h2>Статистика читання</h2>
+        <p>Прочитано: 5</p>
+        <p>Розпочато: 3</p>
+        <p>Не розпочато: 2</p>
+      </aside>
+    </div>
     <footer>
       <p>&copy; 2026</p>
       <p>Розроблено в навчальних цілях. Київський політехнічний інститут.</p>
