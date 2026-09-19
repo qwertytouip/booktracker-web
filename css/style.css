@@ -6,13 +6,13 @@ body {
     font-family: Georgia, "Times New Roman", serif;
     font-size: 1rem;
     line-height: 1.5;
-    background-color: #F5EBE0;
+    background-color: #ead6c3;
     color: #3e2723;
 }
 header {
-    background-color: #E3D5CA;
+    background-color: #e2c2a2;
     padding: 25px 30px;
-    border-bottom: 4px solid #D5BDAF;
+    border-bottom: 4px solid #b08968;
 }
 header h1 {
     color: #3B2A24;
@@ -37,13 +37,11 @@ main {
 }
 section {
     margin: 1rem;
-    border-radius: 6px;
-    border: 1px solid chocolate;
 }
 
 aside  {
-    background-color: #E3D5CA;
-    border: 2px solid #D5BDAF;
+    background-color: #e2c2a2;
+    border: 2px solid #c7a17d;
     padding: 25px 30px;
 }
 footer {
@@ -51,10 +49,10 @@ footer {
     padding: 25px 30px;
     text-align: center;
     color: #1e1413;
-    background-color: #cac0b8;
+    background-color: #ddb892;
 }
 article {
-    background-color: #fffaf5;
+    background-color: #ede0d4;
     border: 1px solid #D5BDAF;
     border-radius: 8px;
     padding: 20px;
