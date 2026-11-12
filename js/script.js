@@ -21,27 +21,37 @@ for (const card of staticCards) {
 
 const listContainer = document.querySelector('#books-list');
 
-// Функція для динамічного створення карток книг та їх додавання у DOM
 function renderBooks(booksArray) {
-    for (const book of booksArray) {
+    listContainer.innerHTML = '';
+
+    booksArray.forEach((book, index) => {
         const articleElement = document.createElement('article');
 
-        const titleElement = document.createElement('h3'); 
+        const titleElement = document.createElement('h3');
         titleElement.textContent = book.title;
 
         const authorElement = document.createElement('p');
         authorElement.textContent = `автор: ${book.author}`;
 
+        const pagesElement = document.createElement('p');
+        pagesElement.textContent = `сторінок: ${book.pages}`;
+
+        const statusSelect = document.createElement('select');
+        statusSelect.classList.add('status-select');
+        statusSelect.dataset.index = index;
+        statusSelect.setAttribute('aria-label', `Статус книги ${book.title}`);
+        statusSelect.append(new Option('Читаю', 'reading'), new Option('Прочитано', 'finished'));
+        statusSelect.value = book.finished ? 'finished' : 'reading';
+
         articleElement.dataset.pages = book.pages;
-        
+
         if (book.finished === false) {
             articleElement.classList.add('unread');
         }
-        
-        articleElement.append(titleElement, authorElement);
 
+        articleElement.append(titleElement, authorElement, pagesElement, statusSelect);
         listContainer.append(articleElement);
-    }
+    });
 }
 console.log(books);
 
@@ -82,13 +92,65 @@ console.log(`--- Розрахунок темпу читання ---`);
 console.log(`Щоб прочитати "${books[0].title}" за ${targetDays} днів, треба читати ${result} сторінок на день.`);
 
 renderBooks(books);
+updateStats();
 
-const countElement = document.querySelector('#books-count');
-countElement.textContent = `Всього книг: ${books.length}`;
+// Оновлює статистику в aside: всього книг, прочитано та читаю
+function updateStats() {
+    const readCount = books.filter(book => book.finished).length;
+    const readingCount = books.length - readCount;
 
+    document.querySelector('#books-count').textContent = `Всього книг: ${books.length}`;
+    document.querySelector('#read-count').textContent = `Прочитано: ${readCount}`;
+    document.querySelector('#reading-count').textContent = `Читаю: ${readingCount}`;
+}
 
+const form = document.querySelector('#book-form');
 
+const titleInput = document.querySelector('#book-title');
+const authorInput = document.querySelector('#book-author');
+const pagesInput = document.querySelector('#book-pages');
+const statusInput = document.querySelector('#book-status');
+const authorError = document.querySelector('#author-error');
 
+// Обробник надсилання форми: додає нову книгу в масив і перемальовує список без перезавантаження
+form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const title = titleInput.value.trim();
+    const author = authorInput.value.trim();
+    const pages = Number(pagesInput.value);
+    const finished = statusInput.value === 'finished';
+    
+    const newBook = { title, author, pages, finished };
+    books.push(newBook);
+    console.log('Додано книгу:', newBook);
+    renderBooks(books);
+    updateStats();
+    form.reset();
+    authorError.textContent = '';
+});
+
+// Додаткова валідація поля «Автор»: забороняє цифри та показує власне повідомлення
+authorInput.addEventListener('input', () => {
+    const message = authorInput.validity.patternMismatch
+        ? 'Ім’я автора не повинно містити цифр'
+        : '';
+
+    authorInput.setCustomValidity(message);
+    authorError.textContent = message;
+});
+
+// Делегування події change: зміна статусу книги прямо в картці та оновлення лічильника
+listContainer.addEventListener('change', (event) => {
+    if (!event.target.classList.contains('status-select')) {
+        return;
+    }
+
+    const index = Number(event.target.dataset.index);
+    books[index].finished = event.target.value === 'finished';
+
+    event.target.closest('article').classList.toggle('unread', !books[index].finished);
+    updateStats();
+});
 
 
 
