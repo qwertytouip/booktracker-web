@@ -1,4 +1,5 @@
 console.log('script.js підключено');
+const API_URL = 'https://openlibrary.org/search.json';
 
 const books = [
     { title: "C# in Depth", author: "Джон Скіт", pages: 528, finished: true },
@@ -21,8 +22,8 @@ for (const card of staticCards) {
 
 const listContainer = document.querySelector('#books-list');
 
-function renderBooks(booksArray) {
-    listContainer.innerHTML = '';
+function renderBooks(booksArray, container = listContainer) {
+    container.innerHTML = '';
 
     booksArray.forEach((book, index) => {
         const articleElement = document.createElement('article');
@@ -33,24 +34,36 @@ function renderBooks(booksArray) {
         const authorElement = document.createElement('p');
         authorElement.textContent = `автор: ${book.author}`;
 
-        const pagesElement = document.createElement('p');
-        pagesElement.textContent = `сторінок: ${book.pages}`;
+        articleElement.append(titleElement, authorElement);
 
-        const statusSelect = document.createElement('select');
-        statusSelect.classList.add('status-select');
-        statusSelect.dataset.index = index;
-        statusSelect.setAttribute('aria-label', `Статус книги ${book.title}`);
-        statusSelect.append(new Option('Читаю', 'reading'), new Option('Прочитано', 'finished'));
-        statusSelect.value = book.finished ? 'finished' : 'reading';
-
-        articleElement.dataset.pages = book.pages;
-
-        if (book.finished === false) {
-            articleElement.classList.add('unread');
+        if (book.year) {
+            const yearElement = document.createElement('p');
+            yearElement.textContent = `рік видання: ${book.year}`;
+            articleElement.append(yearElement);
         }
 
-        articleElement.append(titleElement, authorElement, pagesElement, statusSelect);
-        listContainer.append(articleElement);
+        if (book.pages) {
+            const pagesElement = document.createElement('p');
+            pagesElement.textContent = `сторінок: ${book.pages}`;
+            articleElement.dataset.pages = book.pages;
+            articleElement.append(pagesElement);
+        }
+
+        if (container === listContainer) {
+            const statusSelect = document.createElement('select');
+            statusSelect.classList.add('status-select');
+            statusSelect.dataset.index = index;
+            statusSelect.setAttribute('aria-label', `Статус книги ${book.title}`);
+            statusSelect.append(new Option('Читаю', 'reading'), new Option('Прочитано', 'finished'));
+            statusSelect.value = book.finished ? 'finished' : 'reading';
+            articleElement.append(statusSelect);
+
+            if (book.finished === false) {
+                articleElement.classList.add('unread');
+            }
+        }
+
+        container.append(articleElement);
     });
 }
 console.log(books);
@@ -152,6 +165,74 @@ listContainer.addEventListener('change', (event) => {
     updateStats();
 });
 
+const searchResults = document.querySelector('#search-results');
+const loadingElement = document.querySelector('#loading');
+const searchError = document.querySelector('#search-error');
+const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-query');
+const searchButton = document.querySelector('#search-button');
+const reloadButton = document.querySelector('#reload-button');
+
+// Запит до Open Library Search API (https://openlibrary.org/dev/docs/api/search) і виведення знайдених книг
+async function loadData(query) {
+    const url = `${API_URL}?q=${encodeURIComponent(query)}&fields=title,author_name,first_publish_year,number_of_pages_median&limit=10`;
+    loadingElement.hidden = false;
+    searchError.textContent = '';
+    searchButton.disabled = true;
+    reloadButton.disabled = true;
+    
+    try {
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`Сервер відповів кодом ${response.status}`);
+        }
+        
+        const data = await response.json();
+        console.log(data);
+
+        if (data.docs.length === 0) {
+            searchResults.innerHTML = '';
+            searchError.textContent = 'За запитом нічого не знайдено';
+            return;
+        }
+        
+        const foundBooks = data.docs.map(doc => ({
+            title: doc.title,
+            author: doc.author_name ? doc.author_name.join(', ') : 'невідомий',
+            year: doc.first_publish_year,
+            pages: doc.number_of_pages_median
+        }));
+
+        renderBooks(foundBooks, searchResults);
+
+    } catch (error) {
+        searchResults.innerHTML = '';
+        searchError.textContent = 'Не вдалося завантажити книги з Open Library. Перевірте з’єднання та спробуйте ще раз.';
+        console.error('Помилка запиту до Open Library:', error);
+    } finally {
+        loadingElement.hidden = true;
+        searchButton.disabled = false;
+        reloadButton.disabled = false;
+    }
+    
+}
+
+let lastQuery = searchInput.value.trim();
+
+// Пошук за новою назвою з форми
+searchForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    lastQuery = searchInput.value.trim();
+    loadData(lastQuery);
+});
+
+// Повторний запит з останньою назвою, наприклад після помилки мережі
+reloadButton.addEventListener('click', () => {
+    loadData(lastQuery);
+});
+
+loadData(lastQuery);
 
 
 

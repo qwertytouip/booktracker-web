@@ -13,6 +13,7 @@
     <nav>
         <a href="#add">Додати книгу</a>
         <a href="#myBooks">Мої книги</a>
+        <a href="#search">Пошук</a>
     </nav>
 </header>
 <div class="layout">
@@ -111,6 +112,18 @@
                     <p><span class="badge badge-read">Прочитано</span></p>
                 </article>
             </div>
+        </section>
+        <section id="search">
+            <h2>Пошук в Open Library</h2>
+            <form id="search-form">
+                <label for="search-query">Назва книги</label>
+                <input type="search" id="search-query" name="q" value="Dune" required>
+                <button type="submit" id="search-button">Знайти</button>
+                <button type="button" id="reload-button">Оновити</button>
+            </form>
+            <div class="cards" id="search-results"></div>
+            <p class="loading" id="loading" hidden>Завантаження…</p>
+            <p class="error-message" id="search-error" role="alert"></p>
         </section>
     </main>
 
